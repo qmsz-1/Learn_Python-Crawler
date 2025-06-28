@@ -1,6 +1,6 @@
 import requests
 
-url1 = "https://mpython -m venv .venvovie.douban.com/chart"
+url1 = "http://movie.douban.com/chart"
 header1 = {
     "user-agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/137.0.0.0 Safari/537.36 Edg/137.0.0.0"
 }
