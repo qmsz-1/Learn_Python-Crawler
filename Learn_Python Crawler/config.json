@@ -1,0 +1,11 @@
+{
+    "debug": true,
+    "log_level": "INFO",
+    "max_retries": 3,
+    "database": {
+        "host": "localhost",
+        "port": 5432,
+        "username": "admin",
+        "password": "secret"
+    }
+}
