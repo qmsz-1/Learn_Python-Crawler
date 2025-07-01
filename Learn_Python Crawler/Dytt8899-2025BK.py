@@ -14,7 +14,7 @@ resp.encoding = 'gb2312'
 
 obj1 = re.compile(r'2025必看热片.*?<ul>(?P<ul>.*?)<ul>', re.S)
 obj2 = re.compile(r"<a href='(?P<href>.*?)'", re.S)
-obj3 = re.compile(r'【下载地址】magnet推荐使用utorrent、BitComet等bt客户端下载.*?<a href="(?P<xzdz>.*?)">')
+obj3 = re.compile(r'<td style="WORD-WRAP: break-word" bgcolor="#fdfddf"><a href="(?P<xzdz>.*?)">magnet')
 result1 = obj1.finditer(resp.text)
 for it in result1:
     ul = it.group("ul")
