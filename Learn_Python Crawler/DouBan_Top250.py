@@ -1,8 +1,6 @@
 import requests
 import re
-import csv
 
-url = "https://movie.douban.com/top250?start=0&filter="
 headers = {
     "user-agent": 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/137.0.0.0 Safari/537.36 Edg/137.0.0.0'
 }
@@ -11,30 +9,7 @@ cookies = {
 }
 
 resp = requests.get(url, headers=headers, cookies=cookies)
-
-obj = re.compile(r'<li>.*?<span class="title">(?P<name>.*?)</span>.*?'
-                 r'<span class="title">&nbsp;/&nbsp;(?P<E_name>.*?)</span>.*?'
-                 r'<span class="other">&nbsp;/&nbsp;(?P<O_name>.*?)</span>.*?'
-                 r'<p>(?P<director>.*?)&nbsp;.*?主演:(?P<actor>.*?)/.*?'
-                 r'<br>(?P<year>.*?)&nbsp;.*?/&nbsp;(?P<country>.*?)&nbsp;.*?/&nbsp;(?P<title>.*?)</p>', re.S)
-f = open("date.csv", "w", encoding="utf-8", newline="")
-csv_writer = csv.writer(f)
-for a in range(0, 250, 25):
-    url = "https://movie.douban.com/top250?start={}&filter=".format(a)
-    param = {
-        'start': a,
-        'filter': ''
-    }
-    resp = requests.get(url, headers=headers, cookies=cookies, params = param)
     content = resp.text
     result = obj.finditer(content)
     for item in result:
-        dic = item.groupdict()
-        dic['year'] = dic['year'].strip()
-        dic['director'] = dic['director'].strip()
-        # print(item.group("name"), item.group("E_name"), item.group("O_name"))
-        # print(item.group("director").strip(), item.group("actor").strip())
-        # print(item.group("year").strip(), item.group("country"), item.group("title"))
-        csv_writer.writerow(dic.values())
         resp.close()
-f.close()
